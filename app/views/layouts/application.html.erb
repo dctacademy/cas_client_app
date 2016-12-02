@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auth</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if current_user.nil? %>
+<%= link_to "Sign Up", "http://localhost:3000/users/sign_up?source=#{request.url}" %>
+
+<%= link_to "Sign In", "http://localhost:3000/users/sign_in" %>
+<% else %>
+	<h3>Howdy, <%= current_user.email %></h3>
+
+	<%= link_to "hello", say_hello_path %> | 
+<%= link_to "Sign Out", user_path(current_user), method: :delete %>
+<% end %>
+
+<%= yield %>
+
+<%= debug(session[:user]) %>
+</body>
+</html>
