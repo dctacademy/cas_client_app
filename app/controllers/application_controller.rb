@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def check_auth_params
   	#if current_user.nil?
 	  	if params[:token]
-		   	user = User.create(access_token: params[:token], email: params[:email])
+		   	user = User.find_or_create_by(email: params[:email])
 		   	session[:user] = user
 	  	end
 	  #end
